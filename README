@@ -1,0 +1,19 @@
+Bright Pixel Scan
+------------------------------------------------------------------------------------------
+Background:
+	I noticed some excessively bright pixels after taking a couple of longer exposure
+photos with my Canon 1000D DSLR camera.
+
+Concerned this might be a symptom larger defect but unable to devote hours to manual
+scanning of pixels I wrote this simple script to check each pixel one by one for a value
+greater than a given threshold.
+
+How to use it:
+	Put your lens cap on
+	Switch your camera to TV
+	Spin the dial to 10 seconds
+	Turn off all the lights (prevents viewfinder interference)
+	Press the shutter button
+	Take the resulting image and feed it to this script
+
+Run the script without any arguments for a synopsis and arguments
