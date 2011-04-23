@@ -26,6 +26,7 @@ use Getopt::Long;
 
 my %option = (
 	threshold => 0.3,
+	scale     => 1,
 );
 
 sub usage {
@@ -40,8 +41,10 @@ Arguments:
     -i --image     - Source image to scan
     -t --threshold - Maximum pixel value threshold
     -c --clip      - Save 10x10px clips around the pixel
+    -s --scale     - Scale the clip by this amount
 
 Default threshold is $option{threshold}
+Default scale is $option{scale}
 
 EOU
 exit;
@@ -64,13 +67,15 @@ sub clip {
 		src_maxy => $startY + 10,
 	);
 
+	$img = $img->scale(scalefactor => $option{scale}) if $option{scale} != 1;
+
 	unless ($dir) {
 		$dir = $option{image};
 		$dir =~ s/\..+$//;
 		mkdir $dir;
 	}
 
-	my $file = sprintf '%dx%d.%dx%x.jpg', $x, $y, $startX, $startY;
+	my $file = sprintf '%dx%d.%dx%d.jpg', $x, $y, $startX, $startY;
 	my $path = "$dir/$file";
 
 	$img->write(file => $path);
@@ -82,6 +87,7 @@ usage unless GetOptions(\%option,
 	'image|i=s',
 	'threshold|t=f',
 	'clip|c',
+	'scale|s=f'
 );
 
 usage unless $option{image};
